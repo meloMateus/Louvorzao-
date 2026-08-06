@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Louvorzão ao Ar Livre — IP de Bonsucesso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest-deepest:#0f2418;
+    --forest-deep:#173425;
+    --forest:#1f4a32;
+    --forest-mid:#2f6b47;
+    --forest-bright:#4b9464;
+    --paper:#faf7ef;
+    --paper-dim:#f1ebdb;
+    --ink:#182b20;
+    --ink-soft:#4c5c50;
+    --gold:#b9925a;
+    --gold-soft:#e3cda1;
+    --line:rgba(24,43,32,0.12);
+    --radius:18px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:40px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:radial-gradient(120% 90% at 50% 0%, var(--forest) 0%, var(--forest-deep) 55%, var(--forest-deepest) 100%);
+    padding:44px 24px 60px;
+    overflow:hidden;
+    text-align:center;
+  }
+  .hero-sparks{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .hero-sparks span{
+    width:3px; height:20px;
+    background:var(--forest-bright);
+    border-radius:2px;
+    transform:rotate(-8deg);
+    animation:sway 3.2s ease-in-out infinite;
+  }
+  .hero-sparks span:nth-child(2){height:28px; transform:rotate(0deg); animation-delay:0.3s;}
+  .hero-sparks span:nth-child(3){transform:rotate(8deg); animation-delay:0.6s;}
+  @keyframes sway{
+    0%,100%{transform:translateY(0) rotate(-8deg);}
+    50%{transform:translateY(-3px) rotate(-4deg);}
+  }
+
+  .hero h1{
+    font-family:'Anton',sans-serif;
+    font-weight:400;
+    font-size:clamp(46px,15vw,64px);
+    letter-spacing:0.01em;
+    color:var(--paper);
+    line-height:0.92;
+    text-shadow:0 2px 0 rgba(0,0,0,0.15);
+  }
+  .hero .script{
+    font-family:'Caveat',cursive;
+    font-size:clamp(30px,9vw,42px);
+    color:var(--gold-soft);
+    margin-top:2px;
+    display:block;
+  }
+  .badge-wrap{
+    margin:22px auto 0;
+    display:inline-block;
+    position:relative;
+    padding:10px 26px;
+  }
+  .badge-wrap svg{position:absolute; inset:0; width:100%; height:100%;}
+  .badge-wrap span{
+    position:relative;
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.32em;
+    color:var(--paper);
+  }
+
+  /* tree + lights illustration */
+  .grove{
+    position:relative;
+    margin-top:34px;
+    height:150px;
+  }
+  .grove svg{width:100%; height:100%;}
+  .grove .bulb{
+    animation:twinkle 2.6s ease-in-out infinite;
+  }
+  .grove .bulb:nth-child(2n){animation-delay:0.5s;}
+  .grove .bulb:nth-child(3n){animation-delay:1s;}
+  .grove .bulb:nth-child(4n){animation-delay:1.6s;}
+  @keyframes twinkle{
+    0%,100%{opacity:0.55;}
+    50%{opacity:1;}
+  }
+
+  .hero-foot{
+    margin-top:26px;
+  }
+  .hero-foot .leaf-rule{
+    width:52px; height:2px;
+    background:var(--gold);
+    margin:0 auto 12px;
+    opacity:0.7;
+  }
+  .hero-foot p{
+    font-family:'Inter',sans-serif;
+    letter-spacing:0.22em;
+    font-size:11px;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:40px 22px;}
+  .section-head{margin-bottom:22px;}
+  .section-head h2{
+    font-family:'Anton',sans-serif;
+    font-weight:400;
+    font-size:30px;
+    color:var(--forest-deep);
+    letter-spacing:0.01em;
+  }
+  .section-head p{
+    font-family:'Source Serif 4',serif;
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:15px;
+    margin-top:4px;
+  }
+
+  /* ---------- LITURGIA ORDER ---------- */
+  .order-list{
+    list-style:none;
+    border-left:2px solid var(--line);
+    margin-left:14px;
+  }
+  .order-item{
+    position:relative;
+    padding:0 0 26px 26px;
+  }
+  .order-item:last-child{padding-bottom:0;}
+  .order-item::before{
+    content:attr(data-n);
+    position:absolute;
+    left:-15px; top:-2px;
+    width:28px; height:28px;
+    background:var(--paper);
+    border:2px solid var(--forest-mid);
+    color:var(--forest-deep);
+    border-radius:50%;
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .order-item h3{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    color:var(--ink);
+    letter-spacing:0.01em;
+  }
+  .order-item .sub{
+    font-family:'Source Serif 4',serif;
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .order-item .song-chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:10px;
+  }
+  .song-chip{
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--forest-deep);
+    background:var(--paper-dim);
+    border:1px solid var(--line);
+    padding:7px 12px;
+    border-radius:100px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .song-chip:active{background:var(--gold-soft);}
+
+  /* ---------- LETRAS (accordion) ---------- */
+  .letras{background:var(--forest-deepest);}
+  .letras .section-head h2{color:var(--paper);}
+  .letras .section-head p{color:var(--gold-soft);}
+
+  .letras-first{padding-top:36px;}
+  .top-strip{text-align:center; margin-bottom:30px;}
+  .top-strip .leaf-rule{background:var(--gold); width:44px; margin:0 auto 14px;}
+  .top-strip-name{
+    font-family:'Inter',sans-serif;
+    letter-spacing:0.2em;
+    font-size:11px;
+    text-transform:uppercase;
+    color:rgba(250,247,239,0.6);
+  }
+  .top-strip-event{
+    font-family:'Anton',sans-serif;
+    font-size:26px;
+    color:var(--paper);
+    margin-top:4px;
+  }
+
+  .song-yt{
+    flex-shrink:0;
+    width:34px; height:34px;
+    border-radius:50%;
+    background:rgba(250,247,239,0.06);
+    border:1px solid rgba(250,247,239,0.14);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold-soft);
+    text-decoration:none;
+  }
+  .song-yt:active{background:rgba(250,247,239,0.16);}
+
+  .song{
+    border-radius:var(--radius);
+    background:var(--forest-deep);
+    margin-bottom:12px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .song-trigger{
+    width:100%;
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--paper);
+  }
+  .song-trigger-btn{
+    flex:1;
+    min-width:0;
+    background:none;
+    border:none;
+    text-align:left;
+    padding:4px 0;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    cursor:pointer;
+    color:var(--paper);
+  }
+  .song-num{
+    font-family:'Anton',sans-serif;
+    font-size:20px;
+    color:var(--forest-bright);
+    width:26px;
+    flex-shrink:0;
+  }
+  .song-title-wrap{flex:1; min-width:0;}
+  .song-title-wrap h3{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:16px;
+    color:var(--paper);
+  }
+  .song-title-wrap span{
+    font-family:'Source Serif 4',serif;
+    font-style:italic;
+    font-size:12.5px;
+    color:rgba(250,247,239,0.55);
+  }
+  .chev{
+    flex-shrink:0;
+    width:18px; height:18px;
+    transition:transform 0.3s ease;
+    color:var(--gold);
+    cursor:pointer;
+  }
+  .song.open .chev{transform:rotate(180deg);}
+
+  .song-lyrics{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.4s ease;
+  }
+  .song.open .song-lyrics{max-height:4000px;}
+  .song-lyrics-inner{
+    padding:0 20px 22px 20px;
+    font-family:'Source Serif 4',serif;
+    font-size:15.5px;
+    line-height:1.75;
+    color:rgba(250,247,239,0.92);
+    white-space:pre-line;
+    border-top:1px solid rgba(255,255,255,0.08);
+    padding-top:16px;
+  }
+
+  /* string light divider between songs on open (signature touch) */
+  .song::after{
+    content:'';
+    display:block;
+    height:0;
+  }
+
+  /* ---------- PROGRAMAÇÃO ---------- */
+  .schedule-grid{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .day-card{
+    background:var(--paper-dim);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .day-card .day-name{
+    font-family:'Anton',sans-serif;
+    font-size:18px;
+    color:var(--forest-deep);
+  }
+  .day-card .day-service{
+    font-family:'Source Serif 4',serif;
+    font-style:italic;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  .day-card .day-time{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--gold);
+    white-space:nowrap;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding:44px 22px 10px;
+    background:var(--forest-deepest);
+  }
+  footer .rede-label{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--paper);
+    margin-bottom:2px;
+  }
+  footer .rede-sub{
+    font-family:'Source Serif 4',serif;
+    font-style:italic;
+    font-size:13px;
+    color:rgba(250,247,239,0.6);
+    margin-bottom:20px;
+  }
+  .social-row{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:34px;
+  }
+  .social-row a{
+    width:46px; height:46px;
+    border-radius:50%;
+    background:rgba(250,247,239,0.08);
+    border:1px solid rgba(250,247,239,0.16);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--paper);
+    text-decoration:none;
+  }
+  footer .church-name{
+    font-family:'Inter',sans-serif;
+    letter-spacing:0.2em;
+    font-size:11.5px;
+    text-transform:uppercase;
+    color:rgba(250,247,239,0.75);
+    line-height:1.8;
+  }
+</style>
+</head>
+<body>
+
+  <!-- LETRAS -->
+  <section class="letras letras-first" id="letras">
+    <div class="top-strip">
+      <div class="leaf-rule"></div>
+      <p class="top-strip-name">Igreja Presbiteriana de Bonsucesso</p>
+      <p class="top-strip-event">Louvorzão ao Ar Livre</p>
+    </div>
+    <div class="section-head">
+      <h2>Letras</h2>
+      <p>Toque em cada louvor pra acompanhar · toque no ícone do YouTube pra ouvir</p>
+    </div>
+
+    <div id="song-accordion"></div>
+  </section>
+
+  <!-- PROGRAMAÇÃO -->
+  <section id="programacao">
+    <div class="section-head">
+      <h2>Programação<br>Semanal</h2>
+    </div>
+    <div class="schedule-grid">
+      <div class="day-card">
+        <div>
+          <div class="day-name">Segunda-feira</div>
+          <div class="day-service">Culto de Oração</div>
+        </div>
+        <div class="day-time">19:00h</div>
+      </div>
+      <div class="day-card">
+        <div>
+          <div class="day-name">Quarta-feira</div>
+          <div class="day-service">Culto de Doutrina</div>
+        </div>
+        <div class="day-time">19:00h</div>
+      </div>
+      <div class="day-card">
+        <div>
+          <div class="day-name">Domingo</div>
+          <div class="day-service">Culto Vespertino</div>
+        </div>
+        <div class="day-time">18:30h</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="rede-label">Siga Nossas Redes</div>
+    <div class="rede-sub">clique e saiba mais</div>
+    <div class="social-row">
+      <a href="https://www.instagram.com/ip.bonsucesso?igsh=MmJnNTd1bzE4Nndh" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+      </a>
+      <a href="https://youtube.com/@igpresbiterianadebonsucesso?si=RwZN3jAzx67MmQaY" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://whatsapp.com/channel/0029VbCPipG2ER6gAfldJT0C" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.7-1.2A9 9 0 1 0 12 3z"/><path d="M8.5 8.8c.1-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.6 1.4c.1.2 0 .5-.1.6l-.5.6c-.1.2-.1.4 0 .6.4.8 1.4 1.8 2.2 2.2.2.1.4.1.6 0l.6-.5c.2-.1.4-.2.6-.1l1.4.6c.3.1.4.3.4.5v.5c0 .3 0 .7-.4.8-1.9.7-4.5-.5-6.2-2.2-1.7-1.7-2.9-4.3-2.2-6.2z" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="church-name">Igreja Presbiteriana<br>de Bonsucesso</div>
+  </footer>
+
+<script>
+const songs = [
+  {
+    id:'s1', title:'Jesus em Tua Presença', artist:'Asaph Borba',
+    youtube:'https://www.youtube.com/watch?v=0oventhqIPc',
+    lyrics:`Jesus, em Tua presença reunimo-nos aqui
+Contemplamos Tua face e rendemo-nos a Ti
+Pois um dia Tua morte trouxe vida a todos nós
+E nos deu completo acesso ao coração do Pai
+
+E o véu que separava já não separa mais
+A luz que outrora apagada, agora brilha
+E cada dia brilha mais
+
+Só pra Te adorar
+(E fazer Teu nome grande) e fazer Teu nome grande
+E Te dar o louvor que é devido
+Estamos nós aqui
+
+Jesus, em Tua presença reunimo-nos aqui
+Contemplamos Tua face e rendemo-nos a Ti
+Pois um dia Tua morte trouxe vida a todos nós
+E nos deu completo acesso ao coração do Pai
+
+E o véu que separava já não separa mais
+A luz que outrora apagada, agora brilha
+E cada dia brilha mais
+
+(Só pra Te adorar) só pra Te adorar
+E fazer Teu nome grande
+E Te dar o louvor que é devido
+Estamos nós aqui
+
+(Só pra Te adorar) só pra Te adorar
+E fazer Teu nome grande
+E Te dar o louvor que é devido
+Estamos nós aqui
+
+Estamos nós aqui
+Estamos nós aqui`
+  },
+  {
+    id:'s2', title:'Em Espírito, Em Verdade (Meu Prazer)', artist:'Ministério Koinonya de Louvor',
+    youtube:'https://www.youtube.com/watch?v=YBJHkUP_fbs',
+    lyrics:`Em espírito, em verdade
+Te adoramos, te adoramos (2x)
+Rei dos reis e Senhor
+Te entregamos nosso viver (2x)
+
+Pra te adorar, ó Rei dos reis
+Foi que eu nasci, ó Rei Jesus
+Meu prazer é te louvar
+Meu prazer é estar
+Nos átrios do Senhor
+Meu prazer é viver
+Na casa de Deus
+Onde flui o amor
+
+Em espírito, em verdade
+Te adoramos, te adoramos (2x)
+Rei dos reis e Senhor
+Te entregamos nosso viver (2x)
+
+Pra te adorar, ó Rei dos reis
+Foi que eu nasci, ó Rei Jesus
+Meu prazer é te louvar
+Meu prazer é estar
+Nos átrios do Senhor
+Meu prazer é viver
+Na casa de Deus
+Onde flui o amor
+
+Pra te adorar, ó Rei dos reis
+Foi que eu nasci, ó Rei Jesus
+Meu prazer é te louvar
+Meu prazer é estar
+Nos átrios do Senhor
+Meu prazer é viver
+Na casa de Deus
+Onde flui o amor
+Onde flui o amor`
+  },
+  {
+    id:'s3', title:'Não Há Deus Maior', artist:'',
+    youtube:'https://www.youtube.com/watch?v=DJQkbmLZzew',
+    lyrics:`Não há Deus maior
+Não há Deus melhor
+Não há Deus tão grande
+Como nosso Deus
+
+Criou o céu, criou a Terra
+Criou o mar e o infinito
+Tudo Ele fez, tudo criou
+Tudo formou
+Para o Seu louvor
+Para o Seu louvor
+Para o Seu, para o Seu
+Para o Seu louvor
+
+Não há Deus maior
+Não há Deus melhor
+Não há Deus tão grande
+Como nosso Deus
+
+Criou o céu, criou a Terra
+Criou o mar e o infinito
+Tudo Ele fez, tudo criou
+Tudo formou
+Para o Seu louvor
+Para o Seu louvor
+Para o Seu, para o Seu
+Para o Seu louvor`
+  },
+  {
+    id:'s4', title:'Os Que Confiam / Celebrai', artist:'',
+    youtube:'https://www.youtube.com/watch?v=5TBB6S4uKpw',
+    lyrics:`Os que confiam no Senhor
+São como os montes de Sião
+Que não se abalam
+Mas permanecem para sempre
+
+Como em volta de Jerusalém estão os montes
+Assim é o Senhor em volta do seu povo
+Autoridade e poder
+O domínio em suas mãos
+
+Pois o Senhor é Deus
+O Senhor é Rei dos Povos
+Cale-se diante dele a terra
+Dobre os joelhos, ergam as mãos
+
+Pois o Senhor é Deus
+O Senhor é Rei dos Povos
+
+Não não dá
+Sem Jesus não dá (2x)
+Pra viver não dá
+Sem Jesus não dá (2x)
+
+Celebrai com júbilo ao Senhor
+Todos os moradores da Terra
+Servi ao Senhor com alegria
+Apresentai-vos a Ele com cânticos
+
+Sabei que o Senhor é bom
+E eterna é Sua bondade
+E a Sua fidelidade
+De geração em geração
+
+Aleluia, glória e aleluia
+Aleluia, glória e aleluia (2x)`
+  },
+  {
+    id:'s5', title:'A Ele a Glória', artist:'',
+    youtube:'https://www.youtube.com/watch?v=NfK2VxHg0Ig',
+    lyrics:`Porque Dele e por Ele
+Para Ele são todas as coisas
+Porque Dele e por Ele
+Para Ele são todas as coisas
+Porque Dele e por Ele
+Para Ele são todas as coisas
+Porque Dele e por Ele
+Para Ele são todas as coisas
+
+A Ele a Glória
+A Ele a Glória
+A Ele a Glória
+Pra sempre, amém
+
+A Ele a Glória
+A Ele a Glória
+A Ele a Glória
+Pra sempre, amém
+
+Quão profundas riquezas
+O saber e o conhecer de Deus
+Quão insondáveis
+Seus juízos e os Seus caminhos
+
+Quão profundas riquezas
+O saber e o conhecer de Deus
+Quão insondáveis
+Seus juízos e os Seus caminhos
+
+A Ele a Glória
+A Ele a Glória
+A Ele a Glória
+Pra sempre, amém`
+  },
+  {
+    id:'s6', title:'Ele É Exaltado', artist:'',
+    youtube:'https://www.youtube.com/watch?v=Q_j1LCpIa0Y',
+    lyrics:`O Rei é exaltado nos céus
+Eu o louvarei
+Ele é exaltado
+Pra sempre exaltado
+O Seu nome louvarei
+
+Ele é o Senhor
+Sua verdade vai sempre reinar
+Terra e céus
+Glorificam seu Santo nome
+
+Ele é exaltado
+O Rei é exaltado nos céus
+
+Ele é exaltado
+O Rei é exaltado nos céus
+Eu o louvarei
+Ele é exaltado
+Pra sempre exaltado
+O Seu nome louvarei
+
+Ele é o Senhor
+Sua verdade vai sempre reinar
+Terra e céus
+Glorificam seu Santo nome
+
+Ele é exaltado
+O Rei é exaltado nos céus
+
+Aleluia`
+  },
+  {
+    id:'s7', title:'Te Louvarei', artist:'Trazendo a Arca',
+    youtube:'https://www.youtube.com/watch?v=dt_VMijQ8KI',
+    lyrics:`Perto quero estar
+Junto aos Teus pés
+Pois prazer maior não há
+Que me render e Te adorar
+
+Tudo que há em mim
+Quero Te ofertar
+Mas ainda é pouco, eu sei
+Se comparado ao que ganhei
+
+Não sou apenas servo
+Teu amigo me tornei
+
+Te louvarei
+Não importam as circunstâncias
+Adorarei
+Somente a Ti, Jesus
+(2x)
+
+Somente a Ti, Jesus
+Somente a Ti, Jesus
+Somente a Ti, Jesus`
+  },
+  {
+    id:'s8', title:'Preciso de Ti', artist:'Diante do Trono',
+    youtube:'https://www.youtube.com/watch?v=Hy6QJ6LJW2I',
+    lyrics:`Preciso de Ti
+Diante do Trono
+Preciso de Ti
+Preciso do Teu perdão
+Preciso de Ti
+Quebranta meu coração
+
+Como a corça anseia por águas, assim tenho sede
+Como terra seca, assim é minh'alma
+Preciso de Ti
+
+Distante de Ti, Senhor, não posso viver
+Não vale a pena existir
+Escuta o meu clamor
+Mais que o ar que eu respiro
+Preciso de Ti (2x)
+
+Não posso esquecer
+O que fizeste por mim (o que fizeste por mim)
+Como alto é o céu
+Tua misericórdia é sem fim (misericórdia sem fim)
+Como um pai se compadece dos filhos, assim Tu me amas (me amas)
+Afasta as minhas transgressões
+Preciso de Ti (Senhor)
+
+Distante de Ti, Senhor, não posso viver
+Não vale a pena existir
+Escuta o meu clamor
+Mais que o ar que eu respiro
+Preciso de Ti (2x)`
+  },
+  {
+    id:'s9', title:'Dá-me um Coração Igual ao Teu', artist:'Diante do Trono',
+    youtube:'https://www.youtube.com/watch?v=YKOU5lqwxHc',
+    lyrics:`Se Tu olhares, Senhor, pra dentro de mim
+Nada encontrarás de bom
+Mas um desejo eu tenho de ser transformado
+Preciso tanto do Teu perdão
+Dá-me um novo coração
+
+Dá-me um coração igual ao Teu, meu Mestre
+Dá-me um coração igual ao Teu
+Coração disposto a obedecer
+Cumprir todo o Teu querer
+Dá-me um coração igual ao Teu
+(2x)
+
+Ensina-me a amar o meu irmão
+A olhar com Teus olhos
+Perdoar com o Teu perdão
+Enche-me com Teu Espírito
+Endireita os meus caminhos
+Ó Deus, dá-me um novo coração
+
+Enche-me com Teu Espírito
+Endireita os meus caminhos
+Ó Deus, dá-me um novo coração
+
+Dá-me um coração igual ao Teu, meu Mestre
+Dá-me um coração igual ao Teu
+Coração disposto a obedecer
+Cumprir todo o Teu querer
+Dá-me um coração igual ao Teu
+(2x)`
+  },
+  {
+    id:'s10', title:'Te Agradeço, Meu Senhor', artist:'',
+    youtube:'https://www.youtube.com/watch?v=qTXeK5sQwVk',
+    lyrics:`Por tudo o que tens feito
+Por tudo o que vais fazer
+Por Tuas promessas e tudo o que és
+Eu quero Te agradecer
+Com todo o meu ser
+
+Te agradeço, meu Senhor
+(Te agradeço, meu Senhor)
+Te agradeço, meu Senhor
+(Te agradeço, meu Senhor)
+Te agradeço por me libertar e salvar
+Por ter morrido em meu lugar, Te agradeço
+Jesus, Te agradeço
+Eu Te agradeço
+Te agradeço
+
+Por tudo o que tens feito
+Por tudo o que vais fazer
+Por Tuas promessas e tudo o que és
+Eu quero Te agradecer
+Com todo o meu ser
+
+Te agradeço, meu Senhor
+(Te agradeço, meu Senhor)
+Te agradeço, meu Senhor
+(Te agradeço, meu Senhor)
+Te agradeço por me libertar e salvar
+Por ter morrido em meu lugar, Te agradeço
+Jesus, Te agradeço
+Eu Te agradeço
+Te agradeço
+
+Te agradeço, meu Senhor
+(Te agradeço, meu Senhor)
+Te agradeço, meu Senhor
+(Te agradeço, meu Senhor)`
+  }
+];
+
+const wrap = document.getElementById('song-accordion');
+songs.forEach((s, i) => {
+  const el = document.createElement('div');
+  el.className = 'song';
+  el.id = s.id;
+  el.innerHTML = `
+    <div class="song-trigger">
+      <button class="song-trigger-btn" aria-expanded="false">
+        <span class="song-num">${String(i+1).padStart(2,'0')}</span>
+        <span class="song-title-wrap">
+          <h3>${s.title}</h3>
+          ${s.artist ? `<span>${s.artist}</span>` : ''}
+        </span>
+      </button>
+      ${s.youtube ? `<a class="song-yt" href="${s.youtube}" target="_blank" rel="noopener" aria-label="Assistir ${s.title} no YouTube">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12s0-3.4-.4-5a3 3 0 0 0-2.1-2.1C17.9 4.5 12 4.5 12 4.5s-5.9 0-7.5.4A3 3 0 0 0 2.4 7C2 8.6 2 12 2 12s0 3.4.4 5a3 3 0 0 0 2.1 2.1c1.6.4 7.5.4 7.5.4s5.9 0 7.5-.4A3 3 0 0 0 21.6 17c.4-1.6.4-5 .4-5Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9.6v4.8l4.2-2.4Z"/></svg>
+      </a>` : ''}
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="song-lyrics">
+      <div class="song-lyrics-inner">${s.lyrics}</div>
+    </div>
+  `;
+  wrap.appendChild(el);
+
+  const triggerBtn = el.querySelector('.song-trigger-btn');
+  const chev = el.querySelector('.chev');
+  const toggle = () => {
+    const isOpen = el.classList.contains('open');
+    el.classList.toggle('open', !isOpen);
+    triggerBtn.setAttribute('aria-expanded', String(!isOpen));
+  };
+  triggerBtn.addEventListener('click', toggle);
+  chev.addEventListener('click', toggle);
+});
+</script>
+</body>
+</html>
